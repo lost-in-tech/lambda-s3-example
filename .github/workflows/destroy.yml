@@ -1,0 +1,53 @@
+name: infrastructure-destroy
+
+on:
+  workflow_dispatch:
+    inputs:
+      AWS_REGION:
+        description: region to use to destroy infrastructure
+        required: true
+        default: "ap-southeast-2"
+      ENV:
+        description: name of environment
+        required: true
+        default: "dev"
+      GROUP_NAME:
+        description: name of group
+        required: true
+        default: "retail"
+
+jobs:
+  destroy-infrastructure:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: ${{ ((github.event.inputs.AWS_REGION != '') && github.event.inputs.AWS_REGION) || 'ap-southeast-2' }}
+      GROUP_NAME: ${{ ((github.event.inputs.GROUP_NAME != '') && github.event.inputs.GROUP_NAME) || 'retail' }}
+      ENV_NAME: ${{ ((github.event.inputs.ENV != '') && github.event.inputs.ENV) || 'dev' }}
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: Verify terraform
+        run: terraform --version
+        working-directory: ".terraform"
+
+      - name: Configure AWS credential
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Init Terraform
+        id: terraform-init
+        run: terraform init
+        working-directory: ".terraform"
+
+      - name: Create workspace
+        run: terraform workspace select ${{ env.AWS_REGION }}-${{ env.GROUP_NAME }}-${{ env.ENV_NAME }} || terraform workspace new ${{ env.AWS_REGION }}-${{ env.GROUP_NAME }}-${{ env.ENV_NAME }}
+        working-directory: ".terraform"
+
+      - name: Destroy Terraform
+        id: terraform-destroy
+        run: terraform destroy -auto-approve -var="env=${{ env.ENV_NAME }}" -var="group=${{ env.GROUP_NAME }}" -var="aws_region=${{ env.AWS_REGION }}"
+        working-directory: ".terraform"

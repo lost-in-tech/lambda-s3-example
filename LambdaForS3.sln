@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaForS3", "LambdaForS3\LambdaForS3.csproj", "{B69A38FE-872C-4DA8-92E9-70E43520F556}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{2C62BA2C-CF56-4EDE-BB3D-B2A44D273B4E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambdaForS3.Tests", "LambdaForS3.Tests\LambdaForS3.Tests.csproj", "{AC7F73DF-8E6B-42F6-BC31-ADCCA7B6E7B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B69A38FE-872C-4DA8-92E9-70E43520F556}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B69A38FE-872C-4DA8-92E9-70E43520F556}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B69A38FE-872C-4DA8-92E9-70E43520F556}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B69A38FE-872C-4DA8-92E9-70E43520F556}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC7F73DF-8E6B-42F6-BC31-ADCCA7B6E7B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC7F73DF-8E6B-42F6-BC31-ADCCA7B6E7B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC7F73DF-8E6B-42F6-BC31-ADCCA7B6E7B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC7F73DF-8E6B-42F6-BC31-ADCCA7B6E7B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AC7F73DF-8E6B-42F6-BC31-ADCCA7B6E7B7} = {2C62BA2C-CF56-4EDE-BB3D-B2A44D273B4E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FA97FF03-D393-4A74-B672-CB9D8AE0D6E4}
+	EndGlobalSection
+EndGlobal
