@@ -45,12 +45,11 @@ namespace LambdaForS3
                 return null;
             }
 
-            context.Logger.LogLine($"Bucket: {s3Event.Bucket}, Key: {s3Event.Object.Key}");
-
-            var s3Client = sp.GetRequiredService<IAmazonS3>();
-
+            context.Logger.LogLine($"Bucket: {s3Event.Bucket.Name}, Key: {s3Event.Object.Key}");
+            
             try
             {
+                var s3Client = sp.GetRequiredService<IAmazonS3>();
                 var response = await s3Client.GetObjectMetadataAsync(s3Event.Bucket.Name, s3Event.Object.Key);
                 return response.Headers.ContentType;
             }
