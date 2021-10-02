@@ -23,7 +23,7 @@ namespace LambdaForS3
             var sc = new ServiceCollection();
             configuration = new ConfigurationBuilder().Build();
 
-            sc.AddSingleton(x => new AmazonS3Client());
+            sc.AddSingleton<IAmazonS3>(x => new AmazonS3Client());
 
             sp = sc.BuildServiceProvider();
         }
