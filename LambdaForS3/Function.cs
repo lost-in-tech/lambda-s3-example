@@ -37,13 +37,17 @@ namespace LambdaForS3
         /// <returns></returns>
         public async Task<string> FunctionHandler(S3Event evnt, ILambdaContext context)
         {
-            var s3Client = sp.GetRequiredService<IAmazonS3>();
+            context.Logger.LogLine("Received request for s3 event");
 
             var s3Event = evnt.Records?[0].S3;
             if(s3Event == null)
             {
                 return null;
             }
+
+            context.Logger.LogLine($"Bucket: {s3Event.Bucket}, Key: {s3Event.Object.Key}");
+
+            var s3Client = sp.GetRequiredService<IAmazonS3>();
 
             try
             {
