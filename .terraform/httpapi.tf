@@ -17,7 +17,7 @@ resource "aws_apigatewayv2_stage" "main" {
 resource "aws_apigatewayv2_integration" "main" {
   api_id             = aws_apigatewayv2_api.main.id
   integration_type   = "HTTP_PROXY"
-  integration_uri    = aws_lambda_function.app.invoke_arn
+  integration_uri    = "https://example.com/{proxy}"
   integration_method = "POST"
 }
 
