@@ -13,3 +13,18 @@ resource "aws_apigatewayv2_stage" "main" {
   name        = local.env
   auto_deploy = true
 }
+
+resource "aws_apigatewayv2_integration" "main" {
+  api_id           = aws_apigatewayv2_api.main.id
+  integration_type = "HTTP_PROXY"
+
+  integration_method = "POST"
+}
+
+
+resource "aws_apigatewayv2_route" "main" {
+  api_id    = aws_apigatewayv2_api.main.id
+  route_key = "ANY /api/{proxy+}"
+
+  target = "integrations/${aws_apigatewayv2_integration.main.id}"
+}
