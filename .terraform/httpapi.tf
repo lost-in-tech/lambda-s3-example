@@ -13,7 +13,7 @@ data "archive_file" "lambda_hello_world" {
 
 resource "aws_lambda_function" "hello_world" {
   function_name = "HelloWorld"
-  filename      = data.archive_file.lambda_hello_world.src.output_path
+  filename      = data.archive_file.lambda_hello_world.output_path
 
   runtime = "nodejs12.x"
   handler = "hello.handler"
